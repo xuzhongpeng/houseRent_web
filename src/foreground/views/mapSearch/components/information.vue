@@ -4,8 +4,11 @@
         <div class="block">
             <el-carousel height="200px" indicator-position="none">
                 <el-carousel-item v-for="(item,index) in houseData.housePic" :key="index">
-                <img :src="'http://localhost:8080/picture/'+item.path"  @click="getIntoDetail"/> 
+                <img :src="$host+'picture/'+item.path"  @click="getIntoDetail"/> 
                 </el-carousel-item>
+                 <el-carousel-item v-if="houseData.housePic.length==0">
+                    <img :src="`${$host}picture/404.jpg`"/>
+                </el-carousel-item> 
             </el-carousel>
         </div>
         <div class='amInfo'  @click="getIntoDetail">        
@@ -73,7 +76,7 @@ export default {
     position: absolute;
     z-index: 199;
     left: 15px;
-    top: 127px;
+    top: 77px;
     box-shadow: 1px 1px 19px -5px;
     margin: 0;
     padding: 0;

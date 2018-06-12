@@ -25,7 +25,7 @@
               <el-form-item :label="item.label" v-if="item.type=='picture'"  :prop="item.label">
                 <el-upload
                   class="avatar-uploader"
-                  action="http://localhost:8080/housingrental/house_picController/upload.do"
+                  :action="$host+'housingrental/house_picController/upload.do'"
                   list-type="picture-card"
                  :data="{'house_id':form.id}"
                   :on-success="handleAvatarSuccess"
@@ -39,7 +39,7 @@
               <!-- <el-form-item  :label="item.label" v-if="item.type=='picture1'"  :prop="item.label">
                 <el-upload
                   class="upload-demo"
-                  action="http://localhost:8080/housingrental/house_picController/upload.do"
+                  action="$host+'/housingrental/house_picController/upload.do'"
                   :data="{'house_id':form.id}"
                   :on-preview="handlePreview"
                   :on-remove="handleRemove"
@@ -110,7 +110,7 @@ export default {
         for(let item of this.operationData.rows){
             console.log(item)
               if(item.type=="image"){
-                url='http://localhost:8080/picture/'+this.form[item.prop];
+                url=$host+'picture/'+this.form[item.prop];
               }
               
           }

@@ -21,8 +21,7 @@
                 </el-table-column>
                 <el-table-column  label="租客">
                      <template slot-scope="scope">
-                         <ImgDailog :ImgSrc="'http://localhost:8080/picture/'+scope.row.path" :imgStyle="'width:50px;height:50px'"></ImgDailog>
-                        <!-- <img class="tenantImg" :src="'http://localhost:8080/picture/'+scope.row.path"/> -->
+                         <ImgDailog v-if="scope.row.status=='1'" :ImgSrc="$host+'picture/'+scope.row.path" :imgStyle="'width:50px;height:50px'"></ImgDailog>
                     </template>
                 </el-table-column>
                 <el-table-column prop="house_type" label="房间类型"></el-table-column>

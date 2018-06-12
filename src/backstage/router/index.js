@@ -9,6 +9,11 @@ import touristsManage from '@/backstage/views/touristsManage'
 import houseManage from '@/backstage/views/houseManage'
 import news from '@/backstage/views/news'
 import roomManage from '@/backstage/views/room'
+import rents from '@/backstage/views/rents'
+import electric from '@/backstage/views/electric'
+import leftMessage from '@/backstage/views/leftMessage'
+import repair from '@/backstage/views/repair'
+
 let backstageRouter=
 [{
   path: '/backstage',
@@ -60,6 +65,26 @@ let backstageRouter=
           path:'roomManage',
           name:'roomManage',
           component: roomManage
+        },
+        {
+          path:'rents',
+          name:'rents',
+          component: rents
+        },
+        {
+          path:'electric',
+          name:'electric',
+          component: electric
+        },
+        {
+          path:'leftMessage',
+          name:'leftMessage',
+          component: leftMessage
+        },
+        {
+          path:'repair',
+          name:'repair',
+          component: repair
         }
   ]
 },{

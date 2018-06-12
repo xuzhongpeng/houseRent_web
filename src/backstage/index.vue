@@ -2,11 +2,11 @@
 	<el-row class="container">
 		<el-col :span="24" class="header">
 		    <el-col :span="20" class="logo">
-				<img src="" /> <span><i class="txt">租房后台管理系统系统</i></span>
+				<img src="" /> <span><span class="txt">老树家园租房后台管理系统系统</span></span>
 			</el-col>
 			<el-col :span="4" class="userinfo">
 				<el-dropdown trigger="click">
-					<span class="el-dropdown-link userinfo-inner"><img :src="'http://localhost:8080/picture/'+userInfo.headImg" /> {{userInfo.name}}</span>
+					<span class="el-dropdown-link userinfo-inner"><img :src="$host+'picture/'+userInfo.headImg" /> {{userInfo.name}}</span>
 					<el-dropdown-menu slot="dropdown">
 						<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
 					</el-dropdown-menu>
@@ -17,14 +17,17 @@
 			<aside class='iconfont'>
 				 <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect"
 					theme="dark" unique-opened router>
+					<el-menu-item index="home"><span class="icon icon-1"></span>首页</el-menu-item>
 					<template v-for="(item,index) in menu" v-if="!item.hidden">
 						<el-submenu :index="index+''" v-if="item.is_over=='0'" :key="item.id">
-							<template slot="title"><i :class="'icon '+item.icon"></i>{{item.menu_name}}</template>
+							<template slot="title"><span :class="'icon '+item.icon"></span>{{item.menu_name}}</template>
 							<el-menu-item :route="{'name':child.path}" v-for="child in item.childMenus" :index="child.path" v-if="!child.hidden" :key="child.id">
-								<i :class="'icon '+child.icon"></i>{{child.menu_name}}                
+								<span :class="'icon '+child.icon"></span>{{child.menu_name}}                
 							</el-menu-item>
 						</el-submenu>
-						<el-menu-item v-if="item.is_over=='1'&&item.childMenus.length==0" :key="item.id" :index="item.path"><i :class="'icon '+item.icon"></i>{{item.menu_name}}</el-menu-item>
+						<el-menu-item v-if="item.is_over=='1'&&item.childMenus.length==0" :key="item.id" :index="item.path">
+							<span :class="'icon '+item.icon"></span>{{item.menu_name}}
+						</el-menu-item>
 					</template>
 				</el-menu>
 			</aside>
@@ -86,16 +89,22 @@ import uuid from 'node-uuid'
 			}
 		},
 	　　mounted(){
-			this.$http.post("http://127.0.0.1:8080/housingrental/menuController/getMenuTree.do",{
-				userid:'20180102'
-			},{
-				emulateJSON : true
-			}).then(res=>{
-				this.menu=res.data.menu;
-				console.log(this.menu)
-			},error=>{
-				this.msg=error;
-			});
+			this.getData("administratorsController/getAdminOrManager.do",{
+				userid:this.userInfo.id
+			},res=>{
+				let adminType=res.data;
+				this.$http.post(this.$host+"housingrental/menuController/getMenuTree.do",{
+					userid:adminType
+				},{
+					emulateJSON : true
+				}).then(res=>{
+					this.menu=res.data.menu;
+					console.log(this.menu)
+				},error=>{
+					this.msg=error;
+				});
+			})
+			
 			if(!this.userInfo){
 				this.$router.push("/backstage/login")
 			}
@@ -141,7 +150,9 @@ import uuid from 'node-uuid'
 					margin: 10px 10px 10px 18px;
 				}
 				.txt {
-					color: #20a0ff
+					color: #20a0ff;
+					font-family: STHupo;
+					font-size: 25px;
 				}
 			}
 		}

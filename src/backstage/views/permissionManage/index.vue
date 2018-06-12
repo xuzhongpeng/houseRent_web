@@ -67,6 +67,7 @@ export default {
            "updateUrl":"t_permissionController/update.do",
            "addUrl":"t_permissionController/save.do",
            "getPage":"t_permissionController/getWithPaging.do",
+           "deleteUrl":"t_permissionController/delete.do",
            "searchName":"id",
            "PageData":{
               'searchText':'',
@@ -91,7 +92,7 @@ export default {
   },
   　mounted(){
       //var $store1=$store;
-      this.$http.post("http://127.0.0.1:8080/housingrental/"+this.operationInfo.getPage,
+      this.$http.post(this.$host+"housingrental/"+this.operationInfo.getPage,
       this.operationInfo.PageData,{
 				emulateJSON : true
 			}).then(res=>{

@@ -5,7 +5,7 @@
             <div class="foot-left">          
                 <div class="foot-content" p-id="43">
                     <div class="title">租房网</div>
-                    XX租房网，旨在提供最优质的房源，用最好的服务给各位带来更高的生活品质。
+                    老树家园租房网，旨在提供最优质的房源，用最好的服务给各位带来更高的生活品质。
                 </div>
                 <div class="foot-copy-right" p-id="47">©all, powered by XZP.
                     <a href="javascript:;" class="fa-click ml5" mx-click="showLegal()" p-id="49">法律声明</a>
@@ -23,6 +23,9 @@
                     </li>
                     <li p-id="63">
                         <a href="http://cq.58.com/" target="_blank" p-id="64">58同城</a>
+                    </li>
+                      <li p-id="63">
+                       <router-link to="/backstage/home">后台管理</router-link>
                     </li>
                 </ul>            
             </div>
@@ -49,7 +52,7 @@ footer{
     background: #06060b;
     color: #60606d;
     .footer{
-        width: 1160px!important;
+        width: 1100px!important;
         margin: 0 auto;
         position: relative;
         .foot-left{

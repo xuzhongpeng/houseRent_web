@@ -33,15 +33,7 @@
                 class='table_th'>
             </el-table-column>
             
-           <!--  <el-table-column
-            fixed="right"
-            label="操作"
-            width="100">
-            <template slot-scope="scope">
-                <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-                <el-button type="text" size="small" @click="DialogClick('update',scope.row)">编辑</el-button>
-            </template> 
-            </el-table-column> -->
+            <slot name="button"></slot>
         </el-table>
         <div class="block">
         <el-pagination
@@ -116,7 +108,7 @@ export default {
                             for(let i=0;i<data.length;i++){
                                 let o={};    
                                 o.name=data[i].picturename;
-                                o.url="http://localhost:8080/picture/"+data[i].path;
+                                o.url=this.$host+"picture/"+data[i].path;
                                 console.log(o);
                                 console.log( tableOperation.rows[index1])
                                 tableOperation.rows[index1].filelist.push(o);
@@ -147,7 +139,7 @@ export default {
                 data.push(d.id)
                 console.log(d.id)
             }
-            this.$http.post("http://127.0.0.1:8080/housingrental/"+this.operationInfo.deleteUrl,{ids:JSON.stringify(data)},{
+            this.$http.post(this.$host+"housingrental/"+this.operationInfo.deleteUrl,{ids:JSON.stringify(data)},{
                     emulateJSON : true
                 }).then(res=>{
                     if(res.data.result!=0){

@@ -11,5 +11,5 @@ Vue.use(VueResource)
 Vue.use(Router)
 /* Vue.prototype.router = router; */
 export default new Router({ 
-  routes: [foregroundRouter,backstageRouter[0],officialWebsite,backstageRouter[1]]
+  routes: [foregroundRouter,backstageRouter[0],officialWebsite[0],backstageRouter[1],officialWebsite[1]]
 })

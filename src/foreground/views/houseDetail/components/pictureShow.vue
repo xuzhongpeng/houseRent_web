@@ -4,8 +4,11 @@
         <div class="grid-content">
             <el-carousel :interval="8000" height='450px' ref='pictureArea' indicator-position="none">
                 <el-carousel-item v-for="(item,index) in picList" :key="index">
-                    <img :src="`http://localhost:8080/picture/${item.path}`"/>
-                </el-carousel-item>
+                    <img :src="`${$host}picture/${item.path}`"/>
+                </el-carousel-item> 
+                 <el-carousel-item v-if="picList.length==0">
+                    <img :src="`${$host}picture/404.jpg`"/>
+                </el-carousel-item> 
             </el-carousel>
         </div>
     </el-col>
@@ -13,7 +16,7 @@
         <div class="grid-content pic">
             <div class='imgaa'>
                 <div class='move' ref='move1'>
-                    <div class='imgArea' v-for='(item,index) in picList' @mouseover="change(index)"><img :src='`http://localhost:8080/picture/${item.path}`'/></div>                    
+                    <div class='imgArea' v-for='(item,index) in picList' @mouseover="change(index)"><img :src='`${$host}picture/${item.path}`'/></div>                    
                 </div>
             </div>
             <button type="button" class="el-carousel__arrow edgeTop"  @click="moving(50)"><i class="el-icon-arrow-left"></i></button>

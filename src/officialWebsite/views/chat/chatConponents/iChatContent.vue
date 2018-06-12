@@ -2,7 +2,7 @@
   <div id='chatContent'>    
       <span class='time'>{{time}}</span>
     <div class='contentApart'>  
-        <img class='headImg' src="../../../../assets/headImg.jpg">      
+        <img class='headImg' :src="headSrc">      
         <div class='message'>{{message}}</div>
         
     </div>
@@ -38,6 +38,7 @@
         width:35px;
         height: 35px; 
         position: relative;
+        border-radius: 50%;
     }
     .message{
         width: 80%;

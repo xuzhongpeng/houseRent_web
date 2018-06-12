@@ -1,6 +1,6 @@
 <template>
 <div>
-    <img :src='ImgSrc' @click='imgDialog=true' :style="imgStyle"/>
+    <img :src='ImgSrc' @click.stop='imgDialog=true' :style="imgStyle"/>
   <el-dialog
   :visible.sync="imgDialog"
   width="40%"

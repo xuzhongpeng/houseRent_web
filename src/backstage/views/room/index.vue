@@ -32,7 +32,7 @@ export default {
             },
             {
                  prop:"to_houseid",
-                label:"房子id",                              
+                label:"房子选择",                              
                 type:'select',
                 hidden:true,
                 option:[]
@@ -42,13 +42,6 @@ export default {
                  prop:"houseName",
                 label:"房子名称",  
                 width:"",
-            },
-            {
-                 prop:"to_tenant",
-                label:"租客id",              
-                type:'select',
-                hidden:true,
-                option:[]
             },{
                  prop:"tenantName",
                 label:"租客名称", 
@@ -106,10 +99,6 @@ export default {
                 type:'picture',
                 hidden:true,
                 filelist:[
-                    /* {
-                        name:'20180412153855475.jpg',
-                        url:'http://localhost:8080/picture/20180413145657955.jpg'
-                    } */
                 ]
             },
             
@@ -144,7 +133,7 @@ export default {
   　mounted(){
       
       //var $store1=$store;
-      this.$http.post("http://127.0.0.1:8080/housingrental/"+this.operationInfo.getPage,
+      this.$http.post(this.$host+"housingrental/"+this.operationInfo.getPage,
       this.operationInfo.PageData,{
 				emulateJSON : true
 			}).then(res=>{
@@ -166,7 +155,7 @@ export default {
             })
 
             
-           this.getData('tenantController/getall.do',
+           /* this.getData('tenantController/getall.do',
             null,res=>{
                 let data=res.data.rows;
                 for(let item of data){
@@ -175,7 +164,7 @@ export default {
                 o.value=item.id;
                 this.tableHeader[4].option.push(o);
                 }        
-            })
+            }) */
 		}
 }
 </script>

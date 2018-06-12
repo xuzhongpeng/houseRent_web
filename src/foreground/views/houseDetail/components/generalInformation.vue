@@ -12,7 +12,7 @@
         <el-row>
             <el-col :span="6">
                 <div class="grid-content">
-                    <img :src="`http://localhost:8080/picture/${houseInfo.manager.extended}`">
+                    <img :src="`${$host}picture/${houseInfo.manager.extended}`">
                 </div>
             </el-col>
             <el-col :span="18">

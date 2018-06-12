@@ -92,7 +92,7 @@ export default {
   　mounted(){
       
       //var $store1=$store;
-      this.$http.post("http://127.0.0.1:8080/housingrental/"+this.operationInfo.getPage,
+      this.$http.post(this.$host+"housingrental/"+this.operationInfo.getPage,
       this.operationInfo.PageData,{
 				emulateJSON : true
 			}).then(res=>{
@@ -132,7 +132,7 @@ export default {
           let o={};
           o.name=item.managerName;
           o.value=item.id;
-          this.tableHeader[6].option.push(o);
+          this.tableHeader[5].option.push(o);
         }        
       })
 		}

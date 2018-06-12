@@ -76,7 +76,7 @@ img {
 }
 .main{
     margin:0 auto;
-    width:1200px;
+    width:1000px;
 }
 .houseInfo {
     margin-bottom: 20px;    

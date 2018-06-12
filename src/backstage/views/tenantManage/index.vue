@@ -1,9 +1,17 @@
 <template>
   <div id="">
-    <Table :tableHeader="tableHeader" :tableData="$store.state.tableModule.tableData"  :operationInfo="operationInfo"></Table>
-    </el-table-column>
-  </el-table>
-    <router-view/>
+    <Table :tableHeader="tableHeader" :tableData="$store.state.tableModule.tableData"  :operationInfo="operationInfo">
+      <el-table-column
+            fixed="right"
+            label="操作"
+            width="100"
+            slot="button">
+            <template slot-scope="scope">
+                <el-button  @click="handleClick(scope.row)" type="text" size="small">{{scope.row.is_used==1?"":"通过"}}</el-button>
+            </template> 
+            </el-table-column> 
+    </Table>
+   
   </div>
 </template>
 
@@ -95,29 +103,33 @@ export default {
         Table,
 　　},
   methods:{
-
+    handleClick(row){
+      if(row.is_used==1){
+        return
+      }
+      this.getData("tenantController/adopt.do",
+      {
+        id:row.id,
+        is_used:row.is_used
+      },res=>{
+        if(res.data.result==1){
+          this.$message("通过成功");
+          row.is_used="1";
+        }
+      })
+    }
   },
   　mounted(){
       
       //var $store1=$store;
-      this.$http.post("http://127.0.0.1:8080/housingrental/"+this.operationInfo.getPage,
+      this.$http.post(this.$host+"housingrental/"+this.operationInfo.getPage,
       this.operationInfo.PageData,{
 				emulateJSON : true
 			}).then(res=>{
         //console.log($store)
-        this.$store.dispatch('change',res.data)
+        this.$store.dispatch('change',res.data);
          var array=new Array();
-        var data=this.$store.state.tableModule.tableData.rows;
-        for(var d of data){
-          if(d.level=='1'){
-            var object={
-              name:d.menu_name,
-              value:d.id
-            }
-            array.push(object);
-          }
-        } 
-        this.tableHeader[3].option=array;
+        var data=this.$store.state.tableModule.tableData.rows;        
 				//console.log("*****"+this.$store)
 			},error=>{
 				this.msg=error;

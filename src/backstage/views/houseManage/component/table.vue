@@ -100,7 +100,7 @@ export default {
                     for(let i=0;i<data.length;i++){
                         let o={};    
                         o.name=data[i].picturename;
-                        o.url="http://localhost:8080/picture/"+data[i].path;
+                        o.url="this.$host+/picture/"+data[i].path;
                         console.log(o);
                         console.log( tableOperation.rows[5])
                         tableOperation.rows[5].filelist.push(o);

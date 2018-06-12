@@ -21,13 +21,13 @@
         </el-col>
        </el-row> 
        <el-card class="box-card">
-        <div slot="header" class="clearfix">
+        <!-- <div slot="header" class="clearfix">
             <span>经理信息</span>            
-        </div>
+        </div> -->
         <el-row>
             <el-col :span="6">
                 <div class="grid-content">
-                    <img :src="`http://localhost:8080/picture/${roomInfo.manager.extended}`">
+                    <img :src="`${$host}picture/${roomInfo.manager.extended}`">
                 </div>
             </el-col>
             <el-col :span="18">
@@ -39,6 +39,7 @@
             </el-col>
         </el-row>
       </el-card>
+      <el-button class='button' @click="reserve">立即预定</el-button>
   </div>
 </template>
 <script>
@@ -69,6 +70,11 @@ export default {
             })
       },0)
      
+  },
+  methods:{
+      reserve(){
+          this.$router.push("reserve/"+this.$route.params.roomid)
+      }
   }
 }
 </script>
@@ -116,7 +122,7 @@ img{
     color:rgb(250, 51, 7);
 }
   .box-card {
-    margin-top:20px;
+    margin-top:10px;
   }
   .el-row {
     .el-col{
@@ -136,5 +142,13 @@ img{
         color:#565656;
         
     }
+}
+.button{
+    width: 200px;
+    display: block;
+    margin:30px auto;
+    color: #E5511D;
+    border-color: #F0CAB6;
+    background: #FFE4D0;
 }
 </style>

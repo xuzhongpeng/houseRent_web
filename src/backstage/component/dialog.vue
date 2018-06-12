@@ -3,7 +3,7 @@
     <el-dialog
         :title="operationData.title"
         :visible.sync="$store.state.dialog.centerDialogVisible"
-        width="80%"
+        width="60%"
         center 
         v-if="$store.state.dialog.centerDialogVisible">
         <el-form ref="form" :model="form" label-width="80px">
@@ -13,9 +13,9 @@
                 <el-input v-model="form[item.prop]"  :disabled="item.isChange"></el-input>
               </el-form-item>
               <!-- select框 -->
-              <el-form-item :label="item.label" v-if="item.type=='select'"  :prop="item.label">
+              <el-form-item :label="item.label" v-if="item.type=='select'"   :prop="item.label">
                 <el-select v-model="form[item.prop]" placeholder="">
-                  <el-option :label="option.name" :value="option.value" v-for='(option,index1) in item.option' :key='index1'>
+                  <el-option :label="option.name" :value="option.value" width="100%" v-for='(option,index1) in item.option' :key='index1'>
                      <span style="float: left" v-if="option.name||option.name!=''">{{ option.name }}</span>
                      <span style="float: right; color: #8492a6; font-size: 13px"  v-if="option.value||option.value!=''">{{ option.value }}</span>
                   </el-option>
@@ -25,11 +25,11 @@
               <el-form-item :label="item.label" v-if="item.type=='image'"  :prop="item.label">
                 <el-upload
                   class="avatar-uploader"
-                  action="http://localhost:8080/housingrental/pictureController/upload.do"
+                  :action="$host+'housingrental/pictureController/upload.do'"
                   :show-file-list="false"
                   :on-success="handleAvatarSuccess"
                   :before-upload="beforeAvatarUpload">
-                  <img v-if="image" :src="image" class="avatar"><!-- v-if="imageUrl" -->
+                  <img v-if="image" :src="imageUrl?imageUrl:image" class="avatar"><!-- v-if="imageUrl" -->
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </el-form-item>
@@ -38,7 +38,7 @@
               <el-form-item :label="item.label" v-if="item.type=='picture'"  :prop="item.label">
                 <el-upload
                   class="avatar-uploader"
-                  action="http://localhost:8080/housingrental/house_picController/upload.do"
+                  :action="$host+'housingrental/house_picController/upload.do'"
                   list-type="picture-card"
                  :data="{'house_id':form.id}"
                   :on-success="handleAvatarSuccess"
@@ -89,12 +89,21 @@ export default {
         for(let item of this.operationData.rows){
             console.log(item)
               if(item.type=="image"){
-                url='http://localhost:8080/picture/'+this.form[item.prop];
-              }
-              
+                url=this.form[item.prop];
+              }              
           }
-        return this.imageUrl?this.imageUrl:url;
-      }
+        
+        if(url!=null) {
+          this.getData("pictureController/getPicByid.do",{
+            id:url
+          },res=>{
+              if(res.data!=null){
+                 this.imageUrl=this.$host+'picture/'+res.data.path;
+              }
+          }) 
+        } 
+        return url; 
+      }     
       return this.imageUrl;
     }
   },
@@ -199,5 +208,8 @@ export default {
     width: 100px;
     height: 100px;
     display: block;
+  }
+  .el-select{
+    width:100%;
   }
 </style>

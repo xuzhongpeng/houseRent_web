@@ -1,44 +1,38 @@
 <template>
   <div id="home">
-      <el-upload
-        class="avatar-uploader"
-        action="http://localhost:8080/housingrental/pictureController/upload.do"
-        :show-file-list="false"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar">
-        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-      </el-upload>
+      <information v-for="(item,index) in info" :info='item' :key="index"></information>
   </div>
 </template>
 
 <script>
+import information from './components/information'
 export default {
   name: 'home',
+  components:{
+    information
+  },
   data() {
       return {
-        imageUrl: ''
+        info:[
+          {
+            type:'tenantManage',
+            title:'有租客预定房屋',
+            describe:'有租客预定房屋，请查看详情'
+          }
+        ]
       };
     },
-    methods: {
-      handleAvatarSuccess(res, file) {
-        console.log(res,file)
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
+    mounted() {
+      
+      this.getData("administratorsController/getMeassage.do",
+      null,res=>{
+        let data=res.data;
+        if(data.length>0){
+          this.info=[];
+          this.info=data;
         }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
-      }
+      })
     }
-  
 }
 </script>
 

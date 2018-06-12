@@ -9,22 +9,21 @@
       text-color="rgba(255,255,255,.5)"
       menu-trigger="hover"
       active-text-color="#fff">
-     
+      <li class="logo">
+        <span class="iconfont icon-fangwuzujin">
+          </span>老树家园<span class="detail">简约与舒适的租房网</span>
+        </span>
+      </li>
       <!-- <div class='title_logo'><img class='logo' src='./assets/logo111.png'/>网上租房</div> -->
       <el-menu-item class="lia fi f" index="1">首页</el-menu-item>
       <el-menu-item class="lia fi" index="2">地图找房</el-menu-item>
-      <el-menu-item class="lia fi" index="3">租房守约</el-menu-item>
-      <el-menu-item class="lia fi" index="4">房客心声</el-menu-item>      
-      <el-menu-item class="lia fi" index="5">成为经理</el-menu-item>
-      <el-menu-item class="lia fi" index="6">成为房东</el-menu-item>
-      <!-- <el-submenu class="lia se" index="4">
-        <template slot="title">我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-      </el-submenu> -->
+      <el-menu-item class="lia fi" index="3">租房守约</el-menu-item>  
+      <el-menu-item class="lia fi" index="4">服务</el-menu-item>  
+     
       <el-menu-item class="lia th" index="5">关于我们</el-menu-item>
+      
     </el-menu>
+    
     <router-view/>
   </div>
 </template>
@@ -45,7 +44,17 @@
         else if(key==2){
           this.$router.push({path: '/foreground/mapSearch'});
           /* window.location.reload(); */
-        }else{
+        }
+        else if(key==3){
+          this.$router.push({path:'/foreground/abiding'})
+        }
+        else if(key==4){
+          this.$router.push({path:'/foreground/ourService'})
+        }
+        else if(key==5){
+          this.$router.push({path:'/foreground/aboutUs'})
+        }
+        else{
           this.$router.push({name: '/foreground/detailInfo'});
         }
       }
@@ -57,14 +66,25 @@
       else if (this.$route.path.indexOf('mapSearch') != -1) {
          this.activeIndex='2';
       } 
+      else if(this.$route.path.indexOf('abiding')!=-1){
+        this.activeIndex='3'
+      } 
+      else if(this.$route.path.indexOf('ourService')!=-1){
+        this.activeIndex='4'
+      }
+      else if(this.$route.path.indexOf('aboutUs')!=-1){
+        this.activeIndex='5'
+      }
       else {
-        console.log(this.$route.path)
          this.activeIndex='0';         
       }
     }
   }
 </script>
 <style scoped lang="scss">
+#foreground{
+  width: 100%;
+}
 .el-menu{
   width:100%;
   .lia{
@@ -74,24 +94,30 @@
     margin-left: 100px;
   }
 }
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1100px) {
   .el-menu{
-    width:1200px;
+    width:1100px;
   }
 }
-.title_logo{
-    float: left;
-    margin-top: 5px;
-    font-size: 20px;
-    color: #02b6b7;
-    margin-left: 50px;
 
   .logo{
-    width:50px;
+    float:left;
+    color: #fff;
+    display: inline-block;
+    font-family: STXinwei;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-left:20px;
+    span{
+      font-size: 25px;
+    }
+    .detail{
+      font-size: 15px;
+    }
   }
-}
+
 .f{
-  margin-left:80px !important;
+  margin-left:40px !important;
 }
 
 </style>

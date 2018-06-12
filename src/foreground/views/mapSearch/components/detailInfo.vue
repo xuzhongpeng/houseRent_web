@@ -68,7 +68,7 @@ $height:45px;
     position: absolute;
     z-index: 6201;
     left: 15px;
-    top: 80px;
+    top: 30px;
     height: 45px;
     background-color: #fff;
     box-shadow: 1px 1px 19px -5px;

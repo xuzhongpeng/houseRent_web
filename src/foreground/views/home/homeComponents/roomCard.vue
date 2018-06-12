@@ -1,10 +1,10 @@
 <template>
-  <div class='roomCard'>
+  <div class='roomCard' @click="getInHouse">
        
             <el-card :body-style="{ padding: '0px' }">
                 <el-carousel >
                     <el-carousel-item v-for="(item,index) in imgSrc" :key="index">
-                        <img :src="`http://localhost:8080/picture/${item.path}`" class="image">
+                        <img :src="`${$host}picture/${item.path}`" class="image">
                     </el-carousel-item>
                 </el-carousel>
             
@@ -12,14 +12,12 @@
                 <span>{{room.houseName}}</span>
                 <div class="bottom clearfix">
                 <time class="time">{{room.address}}</time>
-                
+                <div class="money">￥{{room.rent}}元/月</div>
                 </div>
             </div>
             </el-card>
         
-     <!--  <div>理工雅苑</div>
-      <div>重庆巴南区理工雅苑</div>
-      <img src="http://localhost:8080/picture/housePic//20180424105229773.jpg"/> -->
+   
   </div>
 </template>
 
@@ -31,6 +29,11 @@ export default {
     data(){
         return{
             imgSrc:[],
+        }
+    },
+    methods:{
+        getInHouse(){
+            this.$router.push("roomDetail/"+this.room.id)
         }
     },
     mounted(){
@@ -55,6 +58,7 @@ export default {
     text-align: left;
     font-size: 13px;
     width:350px;
+    cursor:pointer;
 }
 .image{
     width: 100%;
@@ -66,7 +70,10 @@ export default {
     font-size: 13px;
     color: #999;
   }
-  
+  .money{
+      color:#ffa100;
+      float: right;
+  }
   .bottom {
     margin-top: 13px;
     line-height: 12px;
